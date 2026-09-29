@@ -62,6 +62,10 @@ option.LIGHT_SHAFTS.comment=Sonnenstrahlen durch Baeume und Fenster. Mit Schatte
 option.LIGHT_SHAFT_STRENGTH=Staerke
 option.LIGHT_SHAFT_SAMPLES=Qualitaet
 option.SHADOWS=Schatten
+option.COLORED_GLASS=Farbiges Glas
+option.COLORED_GLASS.comment=Licht durch gefaerbtes Glas wird eingefaerbt. Kostet CPU (transparente Bloecke im Schatten-Pass) und kann beim schnellen Drehen ruckeln.
+option.SHADOW_BLOCK_ENTITIES=Schatten von Truhen & Co.
+option.SHADOW_BLOCK_ENTITIES.comment=Truhen, Schilder, Betten usw. werfen Schatten. Kostet in Basen viel CPU.
 option.SHADOWS.comment=Groesster FPS-Faktor. Aus = deutlich mehr FPS.
 option.SHADOW_FILTER=Schattenkanten
 value.SHADOW_FILTER.0=Hart (schneller)

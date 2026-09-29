@@ -292,7 +292,8 @@ void main() {
     float oreLight = 0.0;
     vec4 colored = vec4(0.0);
     #ifdef GLOWING_ORES
-    colored = getColoredLight(playerPos, worldN, oreLight); // ore light even without vanilla light
+    // ore light is only visible in dark places -> skip the 3D texture fetch in daylight
+    if (lmcoord.x > 0.01 || lmcoord.y < 0.9) colored = getColoredLight(playerPos, worldN, oreLight);
     #else
     if (lmcoord.x > 0.01) colored = getColoredLight(playerPos, worldN, oreLight);
     #endif

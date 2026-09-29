@@ -62,6 +62,10 @@ option.LIGHT_SHAFTS.comment=Sun rays through trees and windows. More accurate wi
 option.LIGHT_SHAFT_STRENGTH=Strength
 option.LIGHT_SHAFT_SAMPLES=Quality
 option.SHADOWS=Shadows
+option.COLORED_GLASS=Colored Glass
+option.COLORED_GLASS.comment=Light through stained glass gets tinted. Costs CPU (translucent blocks in the shadow pass) and can stutter when turning fast.
+option.SHADOW_BLOCK_ENTITIES=Block Entity Shadows
+option.SHADOW_BLOCK_ENTITIES.comment=Chests, signs, beds etc. cast shadows. Costs a lot of CPU in bases.
 option.SHADOWS.comment=Biggest FPS cost. Off = much higher FPS.
 option.SHADOW_FILTER=Shadow Edges
 value.SHADOW_FILTER.0=Hard (faster)

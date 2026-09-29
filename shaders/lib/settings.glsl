@@ -28,6 +28,7 @@ const float ambientOcclusionLevel = 1.00; // [0.00 0.25 0.50 0.75 1.00]
 #define COLORED_LIGHTING
 #define COLORED_LIGHTING_SATURATION 1.00 // [0.25 0.50 0.75 1.00 1.25 1.50]
 #define COLORED_LIGHTING_RANGE 1.00 // [0.50 0.75 1.00 1.25 1.50 2.00]
+//#define COLORED_GLASS // stained glass tints light (costs CPU: translucent blocks in the shadow pass)
 
 // Only with Iris support for compute shaders and custom images (otherwise normal torch light)
 #if defined COLORED_LIGHTING && defined IRIS_FEATURE_CUSTOM_IMAGES && defined IRIS_FEATURE_COMPUTE_SHADERS
@@ -37,14 +38,19 @@ const float ambientOcclusionLevel = 1.00; // [0.00 0.25 0.50 0.75 1.00]
 // ===== Light shafts =====
 #define LIGHT_SHAFTS
 #define LIGHT_SHAFT_STRENGTH 1.00 // [0.25 0.50 0.75 1.00 1.25 1.50 2.00 3.00]
-#define LIGHT_SHAFT_SAMPLES 8 // [4 6 8 12 16]
+#define LIGHT_SHAFT_SAMPLES 6 // [4 6 8 12 16]
 
 // ===== Shadows =====
 #define SHADOWS
 #define SHADOW_FILTER 1 // [0 1]
+//#define SHADOW_BLOCK_ENTITIES // chests, signs, beds ... cast shadows (costs CPU in bases)
 const int shadowMapResolution = 1024; // [512 1024 1536 2048 3072 4096]
 const float shadowDistance = 96.0; // [48.0 64.0 80.0 96.0 128.0 160.0 192.0 256.0]
 const float shadowDistanceRenderMul = 1.0;
+// Colored lighting writes voxels in the shadow pass. Iris then disables shadow culling completely
+// (every chunk in render distance, every frame!). With shadow.culling = reversed only this safe zone
+// (= half size of the voxel volume) is rendered fully, everything else is culled normally.
+const float voxelDistance = 64.0;
 const bool shadowHardwareFiltering = true;
 const float sunPathRotation = -35.0; // [-60.0 -50.0 -40.0 -35.0 -30.0 -20.0 -10.0 0.0 10.0 20.0 30.0 40.0 50.0 60.0]
 #define SHADOW_DISTORT 0.85
@@ -107,7 +113,7 @@ const float drynessHalflife = 1200.0; // how slowly it dries again (ticks)
 #define WATER_WAVE_SPEED 1.00 // [0.25 0.50 0.75 1.00 1.50 2.00]
 #define WATER_REFLECTIONS
 #define WATER_SSR
-#define SSR_STEPS 16 // [8 12 16 24 32]
+#define SSR_STEPS 12 // [8 12 16 24 32]
 #define WATER_REFRACTION
 #define WATER_REFRACTION_STRENGTH 1.00 // [0.25 0.50 0.75 1.00 1.50 2.00]
 
@@ -137,6 +143,10 @@ const float drynessHalflife = 1200.0; // how slowly it dries again (ticks)
 #ifdef FANCY_PORTALS
 #endif
 #ifdef END_STORMS
+#endif
+#ifdef COLORED_GLASS
+#endif
+#ifdef SHADOW_BLOCK_ENTITIES
 #endif
 #ifdef NETHER_LAVA_GLOW
 #endif
